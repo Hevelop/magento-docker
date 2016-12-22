@@ -1,0 +1,19 @@
+ubuntu:
+    build: ./ubuntu
+    # stdin_open: true
+    # tty: true
+    ports:
+        - "80:80"
+    volumes:
+        - ../htdocs:/var/www/html
+        - ./httpd/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    # command: "true"
+    links:
+        - mariadb
+
+mariadb:
+    build: ./mariadb
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: sqladm
